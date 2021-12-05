@@ -1,0 +1,14 @@
+.label {
+  font-size: 14px;
+  color: #c9c8ce;
+}
+.input {
+  display: block;
+  margin-top: 10px;
+  border-bottom: 1px solid #efefef;
+  padding-bottom: 10px;
+  width: 100%;
+}
+.input:focus {
+  border-bottom: 2px solid #5373A4;
+}

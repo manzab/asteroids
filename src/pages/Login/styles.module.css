@@ -59,6 +59,7 @@
   }
   .image-container {
     border-right: none;
+    border-image: none;
     justify-content: center;
   }
   .text-container {

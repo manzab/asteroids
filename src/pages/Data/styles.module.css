@@ -34,7 +34,7 @@
   border-collapse: collapse;
 }
 .table-container table th {
-  padding: 2vh 3vw;
+  padding: 1.5vh 3vw;
 }
 .table-container table thead th:first-child,
 .table-container table tbody td:first-child {
@@ -49,7 +49,7 @@
   border-bottom: 2px solid #eeeeee;
 }
 .table-container table td {
-  padding: 2vh 3.5vw;
+  padding: 1vh 3vw;
   width: 6vw;
 }
 .button-container {
@@ -57,16 +57,8 @@
   margin-top: 50px;
   justify-content: center;
 }
-.button {
-  width: 115px;
-  padding: 10px 15px;
-  margin-right: 15px;
-  background-color: #e8f0fb;
-  color: #627fb2;
-  cursor: pointer;
-  text-align: center;
-  border-radius: 5px;
-  font-weight: 700;
+.page-counter {
+  margin-top: 15px;
 }
 .loader {
   position: absolute;
@@ -82,12 +74,37 @@
   -webkit-animation: spin 2s linear infinite;
   animation: spin 2s linear infinite;
 }
-
 @keyframes spin {
   0% {
     transform: rotate(0deg);
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+@media (max-width: 992px) {
+  .table-container {
+    font-size: 13px;
+    overflow-x: scroll;
+  }
+  .table-container table td {
+    padding: 0.5vh 1.5vw;
+    padding-left: 0;
+    width: 3vw;
+  }
+  .table-container table th {
+    padding-left: 0;
+  }
+}
+@media (max-width: 768px) {
+  .table-container table {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+@media (max-width: 320px) {
+  .button-container {
+    flex-direction: column;
+    gap: 10px;
   }
 }

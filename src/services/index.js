@@ -1,5 +1,3 @@
-import fetchAsteroidsData from "./getAsteroids";
-import getCurrentDate from "./getCurrentDate";
-import fetchData from "./fetchData";
+import getAsteroids from "./getAsteroids";
 
-export { fetchAsteroidsData, getCurrentDate, fetchData };
+export { getAsteroids };

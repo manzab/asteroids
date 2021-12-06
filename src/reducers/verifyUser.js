@@ -1,7 +1,7 @@
 import { VERIFY_USER } from "../constants/actions";
 import _ from "lodash";
 
-const userCredentials = { username: "_demo", password: "demo_" };
+const userCredentials = { username: "demo", password: "demo" };
 
 const verifyUser = (state = {}, action) => {
   switch (action.type) {

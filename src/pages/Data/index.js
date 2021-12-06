@@ -1,25 +1,32 @@
 import React, { useState, useEffect } from "react";
 import Logo from "../../components/logo";
 import styles from "./styles.module.css";
-import { fetchAsteroidsData, fetchData } from "../../services";
-import getCurrentDate from "../../services/getCurrentDate";
+import { getAsteroids } from "../../services";
+import Button from "../../components/button";
 
 const Data = () => {
+  const [page, setPage] = useState(0);
   const [asteroidsData, setAsteroidsData] = useState();
 
-  const getInitialAsteroidsData = async (date) =>
-    await fetchAsteroidsData(date);
+  const getInitialAsteroidsData = async (page) => await getAsteroids(page);
+
+  const getNextAsteroids = () => {
+    setAsteroidsData();
+    const nextPage = page + 1;
+    setPage(nextPage);
+    getInitialAsteroidsData(nextPage).then((data) => setAsteroidsData(data));
+  };
+
+  const getPreviousAsteroids = () => {
+    setAsteroidsData();
+    const nextPage = page - 1;
+    setPage(nextPage);
+    getInitialAsteroidsData(nextPage).then((data) => setAsteroidsData(data));
+  };
 
   useEffect(() => {
-    const date = getCurrentDate();
-    getInitialAsteroidsData(date).then((data) => setAsteroidsData(data));
+    getInitialAsteroidsData(page).then((data) => setAsteroidsData(data));
   }, []);
-
-  const getAsteroidsData = async (url) => {
-    setAsteroidsData();
-    const asteroidsData = await fetchData(url);
-    setAsteroidsData(asteroidsData);
-  };
 
   return (
     <>
@@ -47,60 +54,51 @@ const Data = () => {
           </thead>
           <tbody>
             {asteroidsData &&
-              Object.keys(asteroidsData["near_earth_objects"]).map((key) =>
-                asteroidsData["near_earth_objects"][key].map(
-                  (asteroidsByDay) => (
-                    <tr key={asteroidsByDay.id}>
-                      <td>{asteroidsByDay.name}</td>
-                      <td>
-                        {Math.round(
-                          asteroidsByDay?.estimated_diameter.meters
-                            .estimated_diameter_min
-                        )}
-                        m
-                      </td>
-                      <td>
-                        {Math.round(
-                          asteroidsByDay?.estimated_diameter.meters
-                            .estimated_diameter_max
-                        )}
-                        m
-                      </td>
-                      <td>
-                        {asteroidsByDay.orbital_data.first_observation_date}
-                      </td>
-                      <td>
-                        {asteroidsByDay.orbital_data.last_observation_date}
-                      </td>
-                      <td>{asteroidsByDay.orbital_data.observations_used}</td>
-                      <td>{asteroidsByDay.orbital_data.orbit_id}</td>
-                      <td>
-                        {asteroidsByDay.is_potentially_hazardous_asteroid ? (
-                          <span className={styles["error-text"]}>YES</span>
-                        ) : (
-                          <span>NO</span>
-                        )}
-                      </td>
-                    </tr>
-                  )
-                )
-              )}
+              asteroidsData["near_earth_objects"].map((asteroid) => (
+                <tr key={asteroid.id}>
+                  <td>{asteroid.name}</td>
+                  <td>
+                    {Math.round(
+                      asteroid?.estimated_diameter.meters.estimated_diameter_min
+                    )}
+                    m
+                  </td>
+                  <td>
+                    {Math.round(
+                      asteroid?.estimated_diameter.meters.estimated_diameter_max
+                    )}
+                    m
+                  </td>
+                  <td>{asteroid.orbital_data.first_observation_date}</td>
+                  <td>{asteroid.orbital_data.last_observation_date}</td>
+                  <td>{asteroid.orbital_data.observations_used}</td>
+                  <td>{asteroid.orbital_data.orbit_id}</td>
+                  <td>
+                    {asteroid.is_potentially_hazardous_asteroid ? (
+                      <span className={styles["error-text"]}>YES</span>
+                    ) : (
+                      <span>NO</span>
+                    )}
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
         {asteroidsData && (
+          <p className={styles["page-counter"]}>
+            Puslapis {page + 1} iš {asteroidsData.page.total_pages}
+          </p>
+        )}
+        {asteroidsData && (
           <div className={styles["button-container"]}>
-            <button
-              className={styles.button}
-              onClick={() => getAsteroidsData(asteroidsData.links.prev)}
-            >
-              Previous
-            </button>
-            <button
-              className={styles.button}
-              onClick={() => getAsteroidsData(asteroidsData.links.next)}
-            >
-              Next
-            </button>
+            {page > 0 && (
+              <Button
+                type="button"
+                onClick={getPreviousAsteroids}
+                text="Previous"
+              />
+            )}
+            <Button type="button" onClick={getNextAsteroids} text="Next" />
           </div>
         )}
       </div>

@@ -7,6 +7,7 @@
 }
 .image-container img {
   width: 20vw;
+  min-width: 150px;
 }
 .image-container {
   width: 25%;
@@ -41,16 +42,6 @@
 .inputs-container-wrapper {
   min-height: 150px;
 }
-.login-button {
-  width: 115px;
-  padding: 10px 15px;
-  background-color: #e8f0fb;
-  color: #627fb2;
-  cursor: pointer;
-  text-align: center;
-  border-radius: 5px;
-  font-weight: 700;
-}
 .text-container {
   margin-top: 23vh;
 }
@@ -60,4 +51,22 @@
 .error {
   color: red;
   margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .content-container {
+    flex-direction: column;
+  }
+  .image-container {
+    border-right: none;
+    justify-content: center;
+  }
+  .text-container {
+    margin-top: 0;
+  }
+}
+@media (max-width: 576px) {
+  .login-container {
+    width: 90%;
+  }
 }

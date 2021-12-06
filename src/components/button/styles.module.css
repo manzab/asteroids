@@ -1,0 +1,17 @@
+.button {
+  width: 115px;
+  padding: 10px 15px;
+  margin-right: 15px;
+  background-color: #e8f0fb;
+  color: #627fb2;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 5px;
+  font-weight: 700;
+}
+@media (max-width: 320px) {
+  .button {
+    width: 100%;
+    margin-right: 0;
+  }
+}

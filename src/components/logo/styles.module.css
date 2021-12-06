@@ -1,14 +1,14 @@
 .logo-container {
   background-color: #006fff;
-  width: 3.5vw;
-  height: 7vh;
+  width: 55px;
+  min-height: 7vh;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 .logo-container svg {
-  width: 1.5vw;
-  height: 3vh;
+  width: 15px;
+  height: 15px;
   fill: #ffffff;
   display: block;
 }

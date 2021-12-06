@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import verifyUser from "../../actions/verifyUser";
 import { useNavigate } from "react-router-dom";
 import * as routes from "../../constants/routes";
+import Button from "../../components/button";
 
 const Login = () => {
   const [nameValue, setNameValue] = useState("");
@@ -62,13 +63,7 @@ const Login = () => {
             </div>
           </div>
           <div className={styles["button-container"]}>
-            <button
-              type="submit"
-              className={styles["login-button"]}
-              onClick={submitCredentials}
-            >
-              Login
-            </button>
+            <Button onClick={submitCredentials} text="Login" type="submit" />
           </div>
         </div>
       </div>
